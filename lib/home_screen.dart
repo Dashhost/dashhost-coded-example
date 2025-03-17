@@ -8,14 +8,16 @@ import 'package:http/http.dart' as http;
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
   String buildUrl() {
-    return "https://api.artic.edu/api/v1/artworks?limit=100";
+    return "https://api.artic.edu/api/v1/artworks?limit=100&fields=id,title,image_id";
   }
 
-  Future<Map<String, dynamic>> fetchCharacters() async {
+  Future<List<dynamic>> fetchCharacters() async {
     final url = buildUrl();
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
-      return jsonDecode(response.body);
+      final result = jsonDecode(response.body);
+      final List<dynamic> items = result['data'];
+      return items.where((item) => item['image_id'] != null).toList();
     } else {
       throw Exception('Failed to load character');
     }
@@ -41,24 +43,24 @@ class HomeScreen extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      body: FutureBuilder(
-        future: fetchCharacters(),
+      body: Container(
+        decoration: const BoxDecoration(color: Colors.blueGrey),
+        child: Column(
+          children: [
+            DashMetaTag.title("Artwork DB"),
+            DashMetaTag.description("Dashhost example app to utilize the revolutionary Flutter package dashhost_flutter"),
+            Expanded(
+              child: FutureBuilder(
+                future: fetchCharacters(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      padding: const EdgeInsets.all(8.0),
 
-        builder: (context, snapshot) {
-          return Container(
-            decoration: const BoxDecoration(color: Colors.blueGrey),
-            child: Column(
-              children: [
-                DashMetaTag.title("Artwork DB"),
-                DashMetaTag.description("Dashhost example app to utilize the revolutionary Flutter package dashhost_flutter"),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: 826,
-                    padding: const EdgeInsets.all(8.0),
-                    itemBuilder: (context, i) {
-                      if (snapshot.hasData) {
+                      itemBuilder: (context, i) {
                         final index = i + 1;
-                        final artwork = snapshot.data?['data'][index];
+                        final artwork = snapshot.data![index];
                         return GestureDetector(
                           onTap: () {
                             context.go('/artwork/${artwork['id']}');
@@ -68,22 +70,24 @@ class HomeScreen extends StatelessWidget {
                             margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                             child: ListTile(
-                              title: Text(artwork['title'], style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w500)),
+                              title: DashText(artwork['title'], style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w500)),
                               trailing: const Icon(Icons.chevron_right, color: Colors.white),
-                              tileColor: Colors.white.withOpacity(0.05),
+                              tileColor: Colors.white.withValues(alpha: 0.05),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                               contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                             ),
                           ),
                         );
-                      }
-                    },
-                  ),
-                ),
-              ],
+                      },
+                    );
+                  }
+
+                  return Center(child: CircularProgressIndicator());
+                },
+              ),
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }

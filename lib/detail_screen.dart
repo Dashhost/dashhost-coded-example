@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 
 String buildUrl(int number) {
-  return "https://api.artic.edu/api/v1/artworks/$number";
+  return "https://api.artic.edu/api/v1/artworks/$number?fields=id,title,image_id,credit_line,description,alt_image_ids";
 }
 
 Future<Map<String, dynamic>> fetchCharacter(int number) async {
