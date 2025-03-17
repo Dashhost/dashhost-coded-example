@@ -9,7 +9,7 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("About Dashhost"),
+        title: const DashText("About Dashhost"),
         leading: IconButton(
           icon: const Icon(Icons.navigate_before),
           onPressed: () {
@@ -22,18 +22,22 @@ class AboutScreen extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            DashMetaTag.title('About Page'),
-            DashMetaTag.description(
-              "Example of the utilization of the revolutionary package and dashhost_flutter for the implementation of an App in the Dashhost environment",
-            ),
-            Text("DISCLAIMER:", style: TextStyle(fontSize: 24)),
-            Text(
-              'Example of the utilization of the revolutionary package and dashhost_flutter for the implementation of an App in the Dashhost environment',
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              DashMetaTag.title('About Page'),
+              DashMetaTag.description(
+                "Example of the utilization of the revolutionary package and dashhost_flutter for the implementation of an App in the Dashhost environment",
+              ),
+              DashText("DISCLAIMER:", style: TextStyle(fontSize: 24)),
+              DashText(
+                'Example of the utilization of the revolutionary package and dashhost_flutter for the implementation of an App in the Dashhost environment',
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
     );

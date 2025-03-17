@@ -1,9 +1,6 @@
 import 'package:dashhost_coded_example/about_screen.dart';
 import 'package:dashhost_coded_example/detail_screen.dart';
 import 'package:dashhost_coded_example/home_screen.dart';
-import 'package:dashhost_flutter/dashhost_flutter.dart';
-import 'package:flutter/material.dart';
-import 'package:url_strategy/url_strategy.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -28,6 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       routerConfig: _router,
       theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.green), useMaterial3: true),

@@ -31,12 +31,12 @@ class DetailScreen extends StatelessWidget {
           final data = snapshot.data!['data'];
 
           if (data == null) {
-            return const Center(child: Text("Error"));
+            return Scaffold(appBar: AppBar(title: Text('Artwork $identifier')), body: const Center(child: Text("Error")));
           }
 
           return Scaffold(
             appBar: AppBar(
-              title: Text(data['title'], style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+              title: DashText(data['title'], style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
               flexibleSpace: Container(color: Colors.blueGrey),
 
               backgroundColor: Colors.transparent,
@@ -69,6 +69,7 @@ class DetailScreen extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                       ),
+                      SizedBox(height: 10),
                       DashText(data['title'], style: Theme.of(context).textTheme.titleLarge, dashTag: "h1"),
                       SizedBox(height: 10),
                       DashText(data['credit_line'] ?? "", style: Theme.of(context).textTheme.labelLarge, dashTag: "p"),
@@ -78,6 +79,7 @@ class DetailScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.labelLarge,
                         dashTag: "p",
                       ),
+                      SizedBox(height: 6),
                     ],
                   ),
                 ),
@@ -86,9 +88,27 @@ class DetailScreen extends StatelessWidget {
           );
         }
         if (snapshot.hasError) {
-          return const Center(child: Text("Error", style: TextStyle(color: Colors.redAccent, fontSize: 24)));
+          return Scaffold(
+            appBar: AppBar(
+              title: DashText('Artwork $identifier', style: TextStyle(color: Colors.white)),
+              flexibleSpace: Container(color: Colors.blueGrey),
+            ),
+            body: Container(
+              color: Colors.blueGrey,
+              child: const Center(child: DashText("Error", style: TextStyle(color: Colors.redAccent, fontSize: 24))),
+            ),
+          );
         }
-        return const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple)));
+        return Scaffold(
+          appBar: AppBar(
+            title: DashText('Artwork $identifier', style: TextStyle(color: Colors.white)),
+            flexibleSpace: Container(color: Colors.blueGrey),
+          ),
+          body: Container(
+            color: Colors.blueGrey,
+            child: const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple))),
+          ),
+        );
       },
     );
   }

@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
     return "https://api.artic.edu/api/v1/artworks?limit=100&fields=id,title,image_id";
   }
 
-  Future<List<dynamic>> fetchCharacters() async {
+  Future<List<dynamic>> fetchArtworks() async {
     final url = buildUrl();
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
           flexibleSpace: Container(color: Colors.blueGrey),
-          title: const Text("Artwork DB", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+          title: const DashText("Artwork DB", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
           centerTitle: true,
           actions: [
             IconButton(
@@ -51,15 +51,14 @@ class HomeScreen extends StatelessWidget {
             DashMetaTag.description("Dashhost example app to utilize the revolutionary Flutter package dashhost_flutter"),
             Expanded(
               child: FutureBuilder(
-                future: fetchCharacters(),
+                future: fetchArtworks(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(
                       itemCount: snapshot.data!.length,
                       padding: const EdgeInsets.all(8.0),
 
-                      itemBuilder: (context, i) {
-                        final index = i + 1;
+                      itemBuilder: (context, index) {
                         final artwork = snapshot.data![index];
                         return GestureDetector(
                           onTap: () {
