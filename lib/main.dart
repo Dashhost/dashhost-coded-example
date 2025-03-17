@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 void main() {
+  GoRouter.optionURLReflectsImperativeAPIs = true;
   setPathUrlStrategy();
   // DashDevTools().enable();
   runApp(const MyApp());

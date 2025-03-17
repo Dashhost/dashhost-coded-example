@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () {
-                context.go('/about');
+                context.push('/about');
               },
               icon: const Icon(Icons.info_outline, color: Colors.white),
             ),
@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                         final artwork = snapshot.data![index];
                         return GestureDetector(
                           onTap: () {
-                            context.go('/artwork/${artwork['id']}');
+                            context.push('/artwork/${artwork['id']}');
                           },
                           child: Card(
                             elevation: 4,
