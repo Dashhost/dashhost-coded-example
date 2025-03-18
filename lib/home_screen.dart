@@ -54,10 +54,6 @@ class HomeScreen extends StatelessWidget {
                 future: fetchArtworks(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      DashRecorder().readyToCapture();
-                    });
-
                     return ListView.builder(
                       itemCount: snapshot.data!.length,
                       padding: const EdgeInsets.all(8.0),
@@ -89,6 +85,7 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
             ),
+            DashReady(),
           ],
         ),
       ),

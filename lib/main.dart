@@ -9,7 +9,7 @@ import 'package:url_strategy/url_strategy.dart';
 void main() {
   GoRouter.optionURLReflectsImperativeAPIs = true;
   setPathUrlStrategy();
-  DashDevTools().enable();
+  // DashDevTools().enable();
   runApp(const MyApp());
 }
 

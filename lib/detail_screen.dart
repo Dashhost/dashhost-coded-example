@@ -84,6 +84,7 @@ class DetailScreen extends StatelessWidget {
                         dashTag: "p",
                       ),
                       SizedBox(height: 6),
+                      DashReady(),
                     ],
                   ),
                 ),
