@@ -53,10 +53,10 @@ packages:
     dependency: "direct main"
     description:
       name: dashhost_flutter
-      sha256: "03a374cf59efcb746172039ec17a46a83170ee2fd02d92606d60dbd8556c60c5"
+      sha256: "26efbaca5c71e46fe7f4b55b6c8b34bf7464b27e0c76b2ef3a22fba9caff7a55"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.3"
   fake_async:
     dependency: transitive
     description:

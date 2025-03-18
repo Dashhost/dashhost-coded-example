@@ -1,6 +1,7 @@
 import 'package:dashhost_coded_example/about_screen.dart';
 import 'package:dashhost_coded_example/detail_screen.dart';
 import 'package:dashhost_coded_example/home_screen.dart';
+import 'package:dashhost_flutter/dashhost_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -8,7 +9,7 @@ import 'package:url_strategy/url_strategy.dart';
 void main() {
   GoRouter.optionURLReflectsImperativeAPIs = true;
   setPathUrlStrategy();
-  // DashDevTools().enable();
+  DashDevTools().enable();
   runApp(const MyApp());
 }
 
