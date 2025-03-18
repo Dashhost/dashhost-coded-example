@@ -7,6 +7,10 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      DashRecorder().readyToCapture();
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: const DashText("About Dashhost"),

@@ -34,6 +34,10 @@ class DetailScreen extends StatelessWidget {
             return Scaffold(appBar: AppBar(title: Text('Artwork $identifier')), body: const Center(child: Text("Error")));
           }
 
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            DashRecorder().readyToCapture();
+          });
+
           return Scaffold(
             appBar: AppBar(
               title: DashText(data['title'], style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
