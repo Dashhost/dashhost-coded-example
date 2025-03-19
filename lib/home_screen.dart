@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
       final List<dynamic> items = result['data'];
       return items.where((item) => item['image_id'] != null).toList();
     } else {
-      throw Exception('Failed to load character');
+      throw Exception('Failed to load artworks');
     }
   }
 

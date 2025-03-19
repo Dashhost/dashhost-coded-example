@@ -8,13 +8,13 @@ String buildUrl(int number) {
   return "https://api.artic.edu/api/v1/artworks/$number?fields=id,title,image_id,credit_line,description,alt_image_ids";
 }
 
-Future<Map<String, dynamic>> fetchCharacter(int number) async {
+Future<Map<String, dynamic>> fetchArtwork(int number) async {
   final url = buildUrl(number);
   final response = await http.get(Uri.parse(url));
   if (response.statusCode == 200) {
     return jsonDecode(response.body);
   } else {
-    throw Exception('Failed to load character');
+    throw Exception('Failed to load artwork');
   }
 }
 
@@ -25,7 +25,7 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: fetchCharacter(identifier),
+      future: fetchArtwork(identifier),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final data = snapshot.data!['data'];
